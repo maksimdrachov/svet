@@ -1,0 +1,54 @@
+# --------------------------------------------------  MYPY  --------------------------------------------------
+[tool.mypy]
+warn_return_any         = true
+warn_unused_configs     = true
+disallow_untyped_defs   = true
+check_untyped_defs      = true
+no_implicit_optional    = true
+warn_redundant_casts    = true
+warn_unused_ignores     = true
+show_error_context      = true
+mypy_path = []
+
+[[tool.mypy.overrides]]
+module = [
+    "spidev",
+    "pigpio",
+    "fabric",
+    "dash",
+    "dash.*",
+    "numpy",
+    "numpy.*",
+    "matplotlib",
+    "matplotlib.*",
+    "psutil",
+    "serial",
+    "pytest",
+    "pycyphal",
+    "pycyphal.*",
+    "uavcan.*",
+    "zubax.*",
+]
+ignore_missing_imports = true
+
+# --------------------------------------------------  PYTEST  --------------------------------------------------
+[tool.pytest.ini_options]
+testpaths        = ["sucker_io", "sucker_control"]
+python_files     = "*.py"
+python_classes   = "_Test"
+python_functions = "_test_"
+log_file         = "pytest.log"
+log_level        = "DEBUG"
+log_cli          = true
+log_cli_level    = "WARNING"
+asyncio_mode     = "auto"
+addopts = "-x -rA --doctest-modules --color=yes -pno:anyio -pno:flake8 -pno:mypy -pno:subtests -pno:cov -pno:enabler"
+
+
+# --------------------------------------------------  BLACK  --------------------------------------------------
+[tool.black]
+line-length = 120
+target-version = ['py311']
+include = '''
+(.*\.pyi?$)
+'''
