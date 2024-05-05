@@ -161,3 +161,5 @@ cython_debug/
 
 # Vscode
 .vscode/
+led_control/node_controller_app.db
+light_control/light_controller_app.db
